@@ -1,0 +1,1 @@
+Per connettersi al database con le funzioni nella cartella dovete prima creare gli utenti del database, i privilegi di ciascun utente li carico appena possibile
