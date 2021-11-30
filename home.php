@@ -6,11 +6,9 @@
 </head>
 <body>
  <?php
-            require('../comuni/header.php');// includo la parte comune
-			require('../comuni/nav.php');  //  
-            ?>
- <?php
-				session_start();
+            	require('../comuni/header.php');// includo la parte comune
+		require('../comuni/nav.php');  
+		session_start();
                 if(isset($_SESSION["id"]))                         
                 {
 					$nome=trim($_SESSION["nome"]);
@@ -36,7 +34,7 @@
 						echo "</p>";
 					echo "</div>";
 				}
-            ?>
+ ?>
 <div class="categories">
 <h2> In primo piano: </h2>
 </div>
