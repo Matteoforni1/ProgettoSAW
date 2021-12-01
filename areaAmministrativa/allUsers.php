@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>areaAmministrativa</title>             
+    <title>allUsers</title>             
 	<link href="stileSaw.css" rel="stylesheet">
 </head>
 <body>
