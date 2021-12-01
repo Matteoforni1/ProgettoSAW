@@ -36,8 +36,9 @@
 			}
 			echo "</table>";
 			mysqli_close($conn);
+			require('../comuni/footer.php');
 		 }
-		 require('../comuni/footer.php'); 
+	
 ?>
 </body>
 </html>
