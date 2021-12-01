@@ -5,15 +5,15 @@
 	<link href="stileSaw.css" rel="stylesheet">
 </head>
 <body>
-<?php
-         require('../comuni/header.php');    
-		 require('../comuni/nav.php');       
+<?php 
 		 session_start();
 	     if (!isset($_SESSION["admin"])){
 			 header('Location: adiminLogin.php');
 			 exit();
 		 }
 		 else {
+			 require('../comuni/header.php');    
+		         require('../comuni/nav.php');       
 			 require('../DB_connections/db_admin_access.php');
 			 $conn=super_admin_access();
 			 $query="SELECT id, nome, cognome, email, ban FROM utente";                          //tabella utente necessita attributo boolean ban
