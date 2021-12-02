@@ -152,7 +152,7 @@ body {
 	min-width: 200px; 
 	margin: auto;
 	text-align: center;
-	height:35%;
+	height:45%;
 	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 .form_submit{
@@ -193,6 +193,24 @@ body {
 }
 .registerbutton:hover{
 	background-color:#DED8B4;
+}
+.reg_form_container{
+	background-color: #ffffff;
+	border-radius: 20px;
+	border: 2px solid #8d99ae;
+	padding: 12px;
+	width: 20%;
+	min-width: 200px; 
+	margin: auto;
+	text-align: center;
+	height:65%;
+	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.reg_form_input{
+	font-size:12px;
+	height:6%;
+	margin:15px;
+	width:75%
 }
 
 .footer {

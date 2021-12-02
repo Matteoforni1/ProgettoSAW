@@ -11,7 +11,7 @@ function check_login_values (event) {
 	var pass=document.getElementById("password").value;
 	if(!email_validate(email)){
 		errore=true;
-		document.getElementById("login_error").innerHTML = '<div class="error_display"><h3>Errore!</h3><p>Inserisci una email valida</p></div>';
+		document.getElementById("login_error").innerHTML = '<div class="error_display"><h3>Errore!</h3><p>La e-mail inserita non è valida</p></div>';
 	}
 	if (pass=="") {
 		errore=true;

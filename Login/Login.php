@@ -1,35 +1,31 @@
 <html>
 <head>
     <title>Accedi</title>
-	<link href="stileSaw.css" rel="stylesheet"> 
+	<link href="../stileSaw.css" rel="stylesheet"> 
 </head>
 <body style="background-color:#ffffff;">
     <?php
-	     if (isset($_SESSION["id"])){
-			 header('Location: home.html');
+	     session_start();
+	     if (isset($_SESSION["id"]) || isset($_SESSION["adminid"])){
+			 echo(1);
 		 }
-		 if (isset($_SESSION["errore"]){
-			 echo('<script type="text/javascript"> alert("'.$SESSION["error"].'")</script>');
+		 if (isset($_SESSION["errore"])){
+			 echo('<script type="text/javascript"> alert("'.$_SESSION["errore"].'")</script>');
+			 unset($_SESSION["errore"]);
 		 }
-	    //include header,footer and required php/js files
 	?>
 	</br>
 	<div class="logocentered">
-	    <h1><a href="home.html">nomelogo</a></h1>  <!--eventualmente anche un img-->
+	    <h1><a href="../home.html">Prefelibro</a></h1>  <!--eventualmente anche un img-->
 	</div>
 	<div id="login_error" class="error_box">
-	<?php
-	    if (isset($_SESSIONE["error"])){
-			 echo('<div class="error_display"');
-		 }
-	?>
 	</div>
 	<div class="form_container">
     <div class="form_header">
         <b>Login</b>
     </div>
     <div class="login_form_box">
-	    <form id="login_form" action="test.php" method="post">
+	    <form id="login_form" action="user_login_check.php" method="post">
 		    <label for="email"><b>Inserisci il tuo indirizzo E-mail</b></label>
 			</br>
 		    <input type="email" id="email" name="email" placeholder="E-mail" class="form_input">
