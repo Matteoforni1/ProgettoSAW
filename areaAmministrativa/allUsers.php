@@ -8,7 +8,7 @@
 <?php 
 		 session_start();
 	     if (!isset($_SESSION["admin"])){
-			 header('Location: adiminLogin.php');
+			 header('Location: adminLogin.php');
 			 exit();
 		 }
 		 else {
