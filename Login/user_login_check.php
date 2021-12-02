@@ -53,7 +53,7 @@ function check_admin($email) {
 		return 0;
 	}
 }
-function check_ban($con,$id) {
+/*function check_ban($con,$id) {
 	$banquery="SELECT * FROM ban WHERE ban.id_utente='$id'";
 	$ban=mysqli_query($con,$banquery);
 	if (mysqli_affected_rows($con)==1) {
@@ -64,7 +64,7 @@ function check_ban($con,$id) {
 		mysqli_free_result($ban);
 		return false;
 	}
-}	
+}*/	
 function user_login_check() {
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST["email"]) && isset($_POST["password"])) { 
@@ -100,7 +100,7 @@ function user_login_check() {
 				mysqli_free_result($result);
 			    return 0;
 		    }
-			if (check_ban($conn,$row["id"])) {
+			if ($row["ban"]) {
 				#header("Location: banned.php");
 				#exit;
 			}

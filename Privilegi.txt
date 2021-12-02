@@ -1,0 +1,14 @@
+privilegi utenti
+superadmin(db_admin_access): all privileges
+
+webadmin(webadmin_access): 
+          SELECT tutto
+          INSERT ban, genere, genere_libro, libro, utente
+          UPDATE libro, amministratore
+          DELETE utente, libro, ban, genere, genere_libro
+
+webuser(webuser_access): 
+          SELECT tutto tranne amministratore e ban
+          INSERT carrello, acquisto, acquisto_libro
+          UPDATE utente, carrello
+          DELETE utente, carrello 
