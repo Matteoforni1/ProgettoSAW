@@ -15,7 +15,7 @@
 			 require('../comuni/header.php');    
 		         require('../comuni/nav.php');       
 			 require('../DB_connections/db_admin_access.php');
-			 $conn=super_admin_access();
+			 $conn=superadmin_access();
 			 $query="SELECT id, nome, cognome, email, ban FROM utente";                          //tabella utente necessita attributo boolean ban
 			 $result=mysqli_query($conn,$query);                                                 //per bannare utenti senza eliminarli dal db
 			echo "<table><tr><th>NOME</th><th>COGNOME</th><th>EMAIL</th><th>BAN</th></tr>";      //come vuole la prof
