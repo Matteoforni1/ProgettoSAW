@@ -28,7 +28,7 @@
 						echo "per te una vasta gamma di libri per ogni genere.\n";
 						echo "Digita il nome di un libro o il correispondente codice ISBN nella barra di ricerca in alto,\t";
 						echo "oppure naviga nell' apposita\t";
-						echo "<a href="cerca.php">pagina</a>";
+						echo "<a href='cerca.php'>pagina</a>";
 						echo ",\t";
 						echo "per una ricerca piu' dettagliata.";
 						echo "</p>";
