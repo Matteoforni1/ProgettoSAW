@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Dic 02, 2021 alle 17:32
+-- Creato il: Dic 05, 2021 alle 13:16
 -- Versione del server: 10.4.21-MariaDB
 -- Versione PHP: 8.0.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `acquisto` (
 
 CREATE TABLE `acquisto_libro` (
   `id_acquisto` int(11) NOT NULL,
-  `ISBN` int(11) NOT NULL,
+  `ISBN` varchar(17) NOT NULL,
   `quantita` int(11) NOT NULL,
   `costo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -108,7 +108,7 @@ DELIMITER ;
 
 CREATE TABLE `carrello` (
   `id_utente` int(11) NOT NULL,
-  `ISBN` int(13) NOT NULL,
+  `ISBN` varchar(17) NOT NULL,
   `quantita` int(11) NOT NULL,
   `costo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -132,7 +132,7 @@ CREATE TABLE `genere` (
 
 CREATE TABLE `genere_libro` (
   `id_genere` int(11) NOT NULL,
-  `ISBN` int(11) NOT NULL
+  `ISBN` varchar(17) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -142,12 +142,54 @@ CREATE TABLE `genere_libro` (
 --
 
 CREATE TABLE `libro` (
-  `ISBN` int(13) NOT NULL,
+  `ISBN` varchar(17) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `autori` varchar(100) NOT NULL,
   `costo` int(11) NOT NULL,
-  `data_pub` date NOT NULL
+  `data_pub` date NOT NULL,
+  `voto` int(11) NOT NULL DEFAULT 0,
+  `num_rec` int(11) NOT NULL DEFAULT 0,
+  `immagine` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `recensione`
+--
+
+CREATE TABLE `recensione` (
+  `id` int(11) NOT NULL,
+  `id_utente` int(11) NOT NULL,
+  `ISBN` varchar(17) NOT NULL,
+  `voto` int(11) NOT NULL,
+  `data` date NOT NULL
+) ;
+
+--
+-- Trigger `recensione`
+--
+DELIMITER $$
+CREATE TRIGGER `Update_voto` AFTER INSERT ON `recensione` FOR EACH ROW UPDATE libro
+SET 
+voto=((libro.voto*libro.num_rec)+new.voto)/(libro.num_rec+1), 
+num_rec=num_rec+1
+WHERE libro.ISBN=ISBN
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `Update_votoD` BEFORE DELETE ON `recensione` FOR EACH ROW UPDATE libro
+SET voto=((libro.voto * libro.num_rec) -old.voto)/(libro.num_rec-1), 
+    num_rec=num_rec-1
+WHERE libro.ISBN=old.ISBN
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `Update_votoU` AFTER UPDATE ON `recensione` FOR EACH ROW UPDATE libro
+SET voto=((libro.voto*libro.num_rec)+(new.voto-old.voto))/libro.num_rec 
+WHERE libro.ISBN=new.ISBN
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -161,9 +203,16 @@ CREATE TABLE `utente` (
   `cognome` varchar(20) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `metodo_p1` varchar(20) DEFAULT NULL,
+  `metodo_p1` varchar(20) NOT NULL DEFAULT '""',
   `ban` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `utente`
+--
+
+INSERT INTO `utente` (`id`, `nome`, `cognome`, `password`, `email`, `metodo_p1`, `ban`) VALUES
+(4, 'aa', 'bb', '$2y$10$SR8Lam9COzhNkf0IlO/OJOyxZeaVHfocwL826gYDk0IMTsxOWFOAS', 'aabb@a.it', '', 0);
 
 --
 -- Trigger `utente`
@@ -231,6 +280,7 @@ ALTER TABLE `genere`
 -- Indici per le tabelle `genere_libro`
 --
 ALTER TABLE `genere_libro`
+  ADD PRIMARY KEY (`id_genere`,`ISBN`),
   ADD KEY `id_genere` (`id_genere`),
   ADD KEY `ISBN` (`ISBN`);
 
@@ -239,6 +289,14 @@ ALTER TABLE `genere_libro`
 --
 ALTER TABLE `libro`
   ADD PRIMARY KEY (`ISBN`);
+
+--
+-- Indici per le tabelle `recensione`
+--
+ALTER TABLE `recensione`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_utente` (`id_utente`,`ISBN`),
+  ADD KEY `ISBN` (`ISBN`);
 
 --
 -- Indici per le tabelle `utente`
@@ -270,10 +328,16 @@ ALTER TABLE `genere`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT per la tabella `recensione`
+--
+ALTER TABLE `recensione`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT per la tabella `utente`
 --
 ALTER TABLE `utente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Limiti per le tabelle scaricate
@@ -311,6 +375,13 @@ ALTER TABLE `carrello`
 ALTER TABLE `genere_libro`
   ADD CONSTRAINT `genere_libro_ibfk_1` FOREIGN KEY (`id_genere`) REFERENCES `genere` (`id`),
   ADD CONSTRAINT `genere_libro_ibfk_2` FOREIGN KEY (`ISBN`) REFERENCES `libro` (`ISBN`);
+
+--
+-- Limiti per la tabella `recensione`
+--
+ALTER TABLE `recensione`
+  ADD CONSTRAINT `recensione_ibfk_1` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`),
+  ADD CONSTRAINT `recensione_ibfk_2` FOREIGN KEY (`ISBN`) REFERENCES `libro` (`ISBN`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

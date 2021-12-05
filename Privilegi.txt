@@ -5,10 +5,10 @@ webadmin(webadmin_access):
           SELECT tutto
           INSERT ban, genere, genere_libro, libro, utente
           UPDATE libro, amministratore
-          DELETE utente, libro, ban, genere, genere_libro
+          DELETE utente, libro, ban, genere,                  genere_libro,recensione
 
 webuser(webuser_access): 
           SELECT tutto tranne amministratore e ban
-          INSERT carrello, acquisto, acquisto_libro
-          UPDATE utente, carrello
-          DELETE utente, carrello 
+          INSERT carrello, acquisto,                  acquisto_libro, recensione
+          UPDATE utente, carrello, recensione
+          DELETE utente, carrello, recensione 
