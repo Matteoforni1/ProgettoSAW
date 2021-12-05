@@ -1,0 +1,2 @@
+Nel DB ho anche cambiato il tipo di isbn da int a varchar(17) in modo da avere il codice completo.
+Quando dovranno esere inseriti nuovi libri si dovrá controllare che la stringa sia corretta
