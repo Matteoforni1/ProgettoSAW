@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Dic 05, 2021 alle 13:16
+-- Creato il: Dic 05, 2021 alle 13:32
 -- Versione del server: 10.4.21-MariaDB
 -- Versione PHP: 8.0.12
 
@@ -147,7 +147,7 @@ CREATE TABLE `libro` (
   `autori` varchar(100) NOT NULL,
   `costo` int(11) NOT NULL,
   `data_pub` date NOT NULL,
-  `voto` int(11) NOT NULL DEFAULT 0,
+  `voto` float NOT NULL DEFAULT 0,
   `num_rec` int(11) NOT NULL DEFAULT 0,
   `immagine` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -162,7 +162,7 @@ CREATE TABLE `recensione` (
   `id` int(11) NOT NULL,
   `id_utente` int(11) NOT NULL,
   `ISBN` varchar(17) NOT NULL,
-  `voto` int(11) NOT NULL,
+  `voto` int(1) NOT NULL,
   `data` date NOT NULL
 ) ;
 
