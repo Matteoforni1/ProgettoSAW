@@ -5,7 +5,7 @@
 	<title> Home </title>
 </head>
 <body>
- <?php													//devo fare ancora lo stile delle copertine, prezzo, nome
+ <?php
 			require('../comuni/header.php');
 			require('../comuni/nav.php');  
 			session_start();
