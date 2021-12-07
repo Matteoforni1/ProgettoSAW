@@ -6,21 +6,30 @@
 </head>
 <body>
 <?php
-		 session_start();
-	     if (!isset($_SESSION["admin"])){
-			 header('Location: adiminLogin.php');
-			 exit();
-		 }
-		 else {
+	 session_start();
+	 if (!isset($_SESSION["adminid"])){
+		header('Location: adiminLogin.php');
+		exit();
+	}
+	else{
+		$lastactivity=$_SESSION["last_activity"];
+		$lastactivity= time() - $lastactivity;
+		if($lastactivity > 1800) {
+			session_destroy();
+			header('Location:login.php');
+			exit();
+		}
+		else {
+			$_SESSION["last_activity"]=time();
 			 require('../comuni/header.php');    
 		     require('../comuni/nav.php');    
 			 require('../DB_connections/db_admin_access.php');	
 			 echo" <div><a href='updateBook.php'>aggiungi un libro...</a></div>";
 			 $conn=superadmin_access();
-			 $query="SELECT ISBN, nome, autori, costo FROM libro";  									//aggiungerei un attributo "quantità disponibile" 
-			 $result=mysqli_query($conn,$query);													    //così da poterla modificare...inutile ma aggiunge funz e più reale
+			 $query="SELECT ISBN, nome, autori, costo FROM libro";
+			 $result=mysqli_query($conn,$query);
 			 echo "<table><tr><th>ISBN</th><th>NOME</th><th>AUTORI</th><th>COSTO</th><th> </th></tr>";
-			 while($row = mysqli_fetch_array($risultato)) {
+			 while($row = mysqli_fetch_array($result)) {
 			 	$ISBN =$row['ISBN'];
 				$nome = trim($row['nome']);
 				$autori = trim($row['autori']);
