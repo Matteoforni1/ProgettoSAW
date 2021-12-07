@@ -6,18 +6,28 @@
 </head>
 <body>
  <?php													//devo fare ancora lo stile delle copertine, prezzo, nome
-            require('../comuni/header.php');
+			require('../comuni/header.php');
 			require('../comuni/nav.php');  
 			session_start();
 			if(isset($_SESSION["id"])) {
-				$nome=trim($_SESSION["nome"]);
-				$cognome=trim($_SESSION["cognome"]);
-				echo "<div class='benvenuto'>"; 
+				$lastactivity=$_SESSION["last_activity"];
+				$lastactivity= time() - $lastactivity;
+				if($lastactivity > 1800) {
+					session_destroy();
+					header('Location:login.php');
+					exit();
+				}
+				else {
+					$_SESSION["last_activity"]=time();
+					$nome=trim($_SESSION["nome"]);
+					$cognome=trim($_SESSION["cognome"]);
+					echo "<div class='benvenuto'>"; 
 					echo "<p>";
-						echo "Benvenuto\t".$nome."\t".$cognome."\n";
-						echo "qui sotto puoi trovare alcuni libri di tuo interesse.";
+					echo "Bentornato\t".$nome."\t".$cognome."\n";
+					echo "qui sotto puoi trovare alcuni libri di tuo interesse.";
 					echo "</p>";
-				echo "</div>";
+					echo "</div>";
+				}
 			}
 			else {
 				echo " <div class='benvenuto'>";
