@@ -100,12 +100,35 @@ body {
   padding-top:5px;
 }
 .main > div {
-  background-color: #ddd;
-  width: 130px;
-  margin: 10px;
+  background-color: #F7F0C9;
+  width: 150px;
+  margin: 5px;
   text-align: center;
-  line-height: 130px;
-  font-size: 30px;
+  height: 250px;
+}
+.carosello{
+	width:120px;
+	height:170px;
+
+}
+
+
+.copertina {
+	width:120px;
+	height:170px;
+	margin-left:15px;
+}
+.prezzo {
+	width:150px;
+	height:20px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.nomelibro {
+	width:150px;
+	height:20px;
+	margin-top:10px;
+	margin-bottom:10px;
 }
 .logocentered{
 	text-align:center;
