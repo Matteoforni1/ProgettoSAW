@@ -40,6 +40,7 @@
 			mysqli_close($conn);
 			require('../comuni/footer.php');
 		 }
+	}
 ?>
 </body>
 </html>
