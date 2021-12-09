@@ -70,8 +70,8 @@ body {
 
 
 .navbar a:hover {
-  background-color: #F3E49A;
-  color: black;
+  background-color: #282828;
+  color:#F3E49A;
 }
 .categories {
 	margin:30px;
