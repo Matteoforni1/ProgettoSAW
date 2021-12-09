@@ -100,9 +100,9 @@
 					$costo=$row['costo'];
 					$costo=$costo."€";
 					echo "<div class='fakeimg'>";
-					echo "<div class='copertina'><a href='libro.php?id=".$ISBN."'><img src=".$imm." alt='copertina'></a></div>";
+					echo "<div class='copertina'><a href='libro.php?ISBN=".$ISBN."'><img src=".$imm." alt='copertina'></a></div>";
 					echo "<div class='prezzo'><p>".$costo."</p></div>";
-					echo "<div class='nomelibro'><a href='libro.php?id=".$ISBN."'>".$nome."</a></div>";
+					echo "<div class='nomelibro'><a href='libro.php?ISBN=".$ISBN."'>".$nome."</a></div>";
 					echo "</div>";
 				}
 				echo "</div>";
