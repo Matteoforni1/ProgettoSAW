@@ -31,7 +31,12 @@
 			$conn=superadmin_access();
 			$query="SELECT id, nome, cognome, email, ban FROM utente";
 			$result=mysqli_query($conn,$query);
-			echo "<table><tr><th>NOME</th><th>COGNOME</th><th>EMAIL</th><th>BAN</th></tr>";
+			echo "<div class='tabella'>";
+			echo "<div class='riga' id='titolo'>";
+			echo "<div class='cella'>Nome</div>";
+			echo "<div class='cella'>Cognome</div>";
+			echo "<div class='cella'>Email</div>";
+			echo "<div class='cella'>Ban</div></div>";
 			while($row = mysqli_fetch_array($result)) {
 				$id= $row['id'];
 				$nome = trim($row['nome']);
@@ -39,16 +44,17 @@
 				$email = trim($row['email']);
 				$ban = $row['ban'];
 				$email=strtolower($email);
-				echo "<tr><td>" .$nome. "</td><td>" .$cognome. "</td><td>" .$email. "</td>";
+				echo "<div class='riga'>";
+				echo "<div class='cella'>" .$nome. "</div><div class='cella'>" .$cognome. "</div><div class='cella'>" .$email. "</div>";
 				if (!$ban) {
-					echo "<td><a href='ban.php?id=".$id."'>Ban</a></td>";
+					echo "<div class='cella'><a href='ban.php?id=".$id."'>Ban</a></div>";
 				}
 				else {
-					echo " <td> Utente bannato </td>";
+					echo " <div class='cella'> Utente bannato </div>";
 				}
-				echo "</tr>";
+				echo "</div>";
 			}
-			echo "</table>";
+			echo "</div>";
 			mysqli_close($conn);
 			require('../comuni/footer.php');
 		}
