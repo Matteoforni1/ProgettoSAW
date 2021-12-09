@@ -43,7 +43,7 @@
 			}
 			require('../DB_connections/webuser_access.php');
 			$conn=webuser_access();
-			$query="SELECT nome, ISBN, immagine, costo FROM libro ORDER BY data_pub LIMIT 8";			//non so in realtà se funziona ORDER BY data_pub...
+			$query="SELECT nome, ISBN, immagine, costo FROM libro ORDER BY data_pub DESC LIMIT 8";			//non so in realtà se funziona ORDER BY data_pub...
 			$result=mysqli_query($conn,$query);									//controllerò prossimamente
 			echo "<div class='categories'>";
 			echo "<h2> In primo piano: </h2>";
