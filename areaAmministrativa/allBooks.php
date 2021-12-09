@@ -28,15 +28,22 @@
 			 $conn=superadmin_access();
 			 $query="SELECT ISBN, nome, autori, costo FROM libro";
 			 $result=mysqli_query($conn,$query);
-			 echo "<table><tr><th>ISBN</th><th>NOME</th><th>AUTORI</th><th>COSTO</th><th> </th></tr>";
+			echo "<div class='tabella'>";
+			echo "<div class='riga' id='titolo'>";
+			echo "<div class='cella'>ISBN</div>";
+			echo "<div class='cella'>Nome</div>";
+			echo "<div class='cella'>Autori</div>";
+			echo "<div class='cella'>Costo</div>";
+			echo "<div class='cella'>modifica</div></div>";
 			 while($row = mysqli_fetch_array($result)) {
 			 	$ISBN =$row['ISBN'];
 				$nome = trim($row['nome']);
 				$autori = trim($row['autori']);
 				$costo = $row['costo'];
-				echo "<tr><td>" .$ISBN. "</td><td>" .$nome. "</td><td>" .$autori. "</td><td>" .$costo. "</td><td><a href='updateBook.php?id=".$ISBN."'>modifica</a></td></tr>";
+				echo "<div class='riga'>";
+				echo "<div class='cella'>" .$ISBN. "</div><div class='cella'>" .$nome. "</div><div class='cella'>" .$autori. "</div><div class='cella'>" .$costo. "</div><div class='cella'><a href='updateBook.php?id=".$ISBN."'>modifica</a></div></div>";
 			 }
-			echo "</table>";
+			echo "</div>";
 			mysqli_close($conn);
 			require('../comuni/footer.php');
 		 }
