@@ -130,6 +130,13 @@ body {
 	margin-top:10px;
 	margin-bottom:10px;
 }
+.nomelibro a {
+	text-decoration: none;
+	color: black;
+}
+.benvenuto {
+	text-align:center;
+}
 .logocentered{
 	text-align:center;
 	font-size:medium;
