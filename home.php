@@ -13,6 +13,7 @@
 				$lastactivity=$_SESSION["last_activity"];
 				$lastactivity= time() - $lastactivity;
 				if($lastactivity > 1800) {
+					session_unset();
 					session_destroy();
 					header('Location:login.php');
 					exit();
@@ -43,8 +44,8 @@
 			}
 			require('../DB_connections/webuser_access.php');
 			$conn=webuser_access();
-			$query="SELECT nome, ISBN, immagine, costo FROM libro ORDER BY data_pub DESC LIMIT 8";			//non so in realtà se funziona ORDER BY data_pub...
-			$result=mysqli_query($conn,$query);									//controllerò prossimamente
+			$query="SELECT nome, ISBN, immagine, costo FROM libro ORDER BY data_pub DESC LIMIT 8";
+			$result=mysqli_query($conn,$query);
 			echo "<div class='categories'>";
 			echo "<h2> In primo piano: </h2>";
 			echo "</div>";
@@ -56,7 +57,7 @@
 				$costo=$row['costo'];
 				$costo=$costo."€";
 				echo "<div class='fakeimg'>";
-				echo "<div class='copertina'><a href='libro.php?id=".$ISBN."'><img src=".$imm." alt='copertina'></a></div>";
+				echo "<div class='copertina'><a href='libro.php?id=".$ISBN."'><img src=".$imm." alt='copertina' class='carosello'></a></div>";
 				echo "<div class='prezzo'><p>".$costo."</p></div>";
 				echo "<div class='nomelibro'><a href='libro.php?id=".$ISBN."'>".$nome."</a></div>";
 				echo "</div>";
@@ -75,7 +76,7 @@
 				$costo=$row['costo'];
 				$costo=$costo."€";
 				echo "<div class='fakeimg'>";
-				echo "<div class='copertina'><a href='libro.php?id=".$ISBN."'><img src=".$imm." alt='copertina'></a></div>";
+				echo "<div class='copertina'><a href='libro.php?id=".$ISBN."'><img src=".$imm." alt='copertina' class='carosello'></a></div>";
 				echo "<div class='prezzo'><p>".$costo."</p></div>";
 				echo "<div class='nomelibro'><a href='libro.php?id=".$ISBN."'>".$nome."</a></div>";
 				echo "</div>";
@@ -100,7 +101,7 @@
 					$costo=$row['costo'];
 					$costo=$costo."€";
 					echo "<div class='fakeimg'>";
-					echo "<div class='copertina'><a href='libro.php?ISBN=".$ISBN."'><img src=".$imm." alt='copertina'></a></div>";
+					echo "<div class='copertina'><a href='libro.php?ISBN=".$ISBN."'><img src=".$imm." alt='copertina' class='carosello'></a></div>";
 					echo "<div class='prezzo'><p>".$costo."</p></div>";
 					echo "<div class='nomelibro'><a href='libro.php?ISBN=".$ISBN."'>".$nome."</a></div>";
 					echo "</div>";
