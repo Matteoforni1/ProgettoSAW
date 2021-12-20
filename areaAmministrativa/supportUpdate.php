@@ -12,11 +12,9 @@
 			return 1;
 		}
 	}
-
-
 	session_start();
 	if (!isset($_SESSION["adminid"])){
-		header('Location: adiminLogin.php');
+		header('Location:login.php');
 		exit();
 	}
 	else{
@@ -45,7 +43,10 @@
 					exit();
 				}
 				else {
-					$_SESSION_["errore"]="vi è stato un errore nel caricamento, ripetere l operazione";
+					if (session_status() !== PHP_SESSION_ACTIVE) {
+								session_start();
+						}
+					$_SESSION["errore"]="vi è stato un errore nel caricamento, ripetere l operazione";
 					mysqli_close($conn);
 					header("Location: allBooks.php");
 					exit();
@@ -56,46 +57,46 @@
 				$nome=trim($_POST['nome']);
 				$autori=trim($_POST['autori']);
 				$gen=($_POST['genere']);
+				$imm= trim($_POST['immagine']);
 				$ISBN = mysqli_real_escape_string($conn,$ISBN);
 				$costo=mysqli_real_escape_string($conn,$_POST['costo']);
 				$data=mysqli_real_escape_string($conn,$_POST['data']);
 				$nome = mysqli_real_escape_string($conn,$nome);
 				$autori = mysqli_real_escape_string($conn,$autori);
-				$imm= trim($_POST['immagine']);
+				$imm=mysqli_real_escape_string($conn,$imm);
 				$pattern1="/^([0-9]{3})[-][0-9][-]([0-9]{2})[-]([0-9]{6})[-][0-9]$/";
 				$pattern2="/^(\w{1,30})((.jpg)|(.png))$/";
 				if (preg_match($pattern1,$ISBN)) {
 					$check_res = check_book($ISBN,$conn);
 					if ($check_res == 0) {
-						if (session_status() === PHP_SESSION_NONE) {
+						if (session_status() !== PHP_SESSION_ACTIVE) {
 								session_start();
 						}
-						$_SESSION_["errore"]="ISBN inserito è già presente nel db";
+						$_SESSION["errore"]="ISBN inserito è già presente nel db";
 						mysqli_close($conn);
 						header("Location: insertBook.php");
 						exit();
 					}
 					if (preg_match($pattern2,$imm)) {
-						$query1="INSERT INTO libro (ISBN,nome,autori,costo,data-pub,immagine) VALUES ('$ISBN','$nome','$autori','$costo','$data','$imm')"; 
-						$result=mysqli_query($conn,$query1);
+						$query1="INSERT INTO libro (ISBN,nome,autori,costo,data_pub,immagine) VALUES ('$ISBN','$nome','$autori','$costo','$data','$imm')"; 
+						$result1=mysqli_query($conn,$query1);
 						if (mysqli_affected_rows($conn)!=1) {
-							if (session_status() === PHP_SESSION_NONE) {
+							if (session_status() !== PHP_SESSION_ACTIVE) {
 								session_start();
 							}
-							$_SESSION_["errore"]="si è verificato un errore nell inserimento";
+							$_SESSION["errore"]="si è verificato un errore nell inserimento";
 							mysqli_close($conn);
 							header("Location: insertBook.php");
 							exit();
 						}
-						mysqli_free_result($result);
 						$gen=mysqli_real_escape_string($conn,$gen);
 						$query2="INSERT INTO genere_libro (id_genere,ISBN) VALUES ('$gen','$ISBN')"; 
-						$result=mysqli_query($conn,$query2);
+						$result2=mysqli_query($conn,$query2);
 						if (mysqli_affected_rows($conn)!=1) {
-							if (session_status() === PHP_SESSION_NONE) {
+							if (session_status() !== PHP_SESSION_ACTIVE) {
 								session_start();
 							}
-							$_SESSION_["errore"]="si è verificato un errore nell inserimento del genere";
+							$_SESSION["errore"]="si è verificato un errore nell inserimento del genere";
 							mysqli_close($conn);
 							header("Location: insertBook.php");
 							exit();
@@ -105,20 +106,20 @@
 						exit();
 					}
 					else {
-						if (session_status() === PHP_SESSION_NONE) {
+						if (session_status() !== PHP_SESSION_ACTIVE) {
 							session_start();
 						}
-						$_SESSION_["errore"]="imagesrc non corretto";
+						$_SESSION["errore"]="imagesrc non corretto";
 						mysqli_close($conn);
 						header("Location: insertBook.php");
 						exit();
 					}	
 				}
 				else {
-					if (session_status() === PHP_SESSION_NONE) {
+					if (session_status() !== PHP_SESSION_ACTIVE) {
 							session_start();
 						}
-					$_SESSION_["errore"]="ISBN non corretto";
+					$_SESSION["errore"]="ISBN non corretto";
 					mysqli_close($conn);
 					header("Location: insertBook.php");
 					exit();
@@ -126,4 +127,5 @@
 			}
 		}
 	}
+	
 ?>
