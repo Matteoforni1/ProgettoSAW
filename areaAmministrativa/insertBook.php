@@ -6,9 +6,9 @@
 </head>
 <body>
 <?php
-	session_start();
+session_start();
 	if (!isset($_SESSION["adminid"])){
-		header('Location: adiminLogin.php');
+		header('Location:login.php');
 		exit();
 	}
 	else{
@@ -23,7 +23,10 @@
 		else {
 			$_SESSION["last_activity"]=time();
 			require('comuni/header.php');    
-		    require('comuni/nav.php'); 
+		    require('comuni/nav.php');
+			if (session_status() !== PHP_SESSION_ACTIVE) {
+				session_start();
+			}
 			if (isset($_SESSION["errore"])){
 				echo('<script type="text/javascript"> alert("'.$_SESSION["errore"].'")</script>');
 				unset($_SESSION["errore"]);
@@ -70,6 +73,7 @@
 			require('comuni/footer.php');
 		}
 	}
+	
 ?>
 </body>
 </html>
