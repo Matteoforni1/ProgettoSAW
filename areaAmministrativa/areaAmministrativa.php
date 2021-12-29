@@ -8,13 +8,14 @@
 <?php
 	session_start();
 	if (!isset($_SESSION["adminid"])){
-		header('Location: adiminLogin.php');
+		header('Location: login.php');
 		exit();
 	}
 	else{
 		$lastactivity=$_SESSION["last_activity"];
 		$lastactivity= time() - $lastactivity;
 		if($lastactivity > 1800) {
+			session_unset();
 			session_destroy();
 			header('Location:login.php');
 			exit();
