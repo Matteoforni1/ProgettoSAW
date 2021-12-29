@@ -8,27 +8,28 @@
 <?php 
 	session_start();
 	if (!isset($_SESSION["adminid"])){
-		header('Location: adiminLogin.php');
+		header('Location: login.php');
 		exit();
 	}
 	else{
 		$lastactivity=$_SESSION["last_activity"];
 		$lastactivity= time() - $lastactivity;
 		if($lastactivity > 1800) {
+			session_unset();
 			session_destroy();
 			header('Location:login.php');
 			exit();
 		}
 		else {
 			$_SESSION["last_activity"]=time();
-			require('../comuni/header.php');    
-		    require('../comuni/nav.php');
+			require('comuni/header.php');    
+		    require('comuni/nav.php');
 			if (isset($_SESSION["errore"])){
 				echo('<script type="text/javascript"> alert("'.$_SESSION["errore"].'")</script>');
 				unset($_SESSION["errore"]);
 			}
-			require('../DB_connections/db_admin_access.php');
-			$conn=superadmin_access();
+			require('DB_connections/webadmin_access.php');	
+			$conn=webadmin_access();
 			$query="SELECT id, nome, cognome, email, ban FROM utente";
 			$result=mysqli_query($conn,$query);
 			echo "<div class='tabella'>";
@@ -56,7 +57,7 @@
 			}
 			echo "</div>";
 			mysqli_close($conn);
-			require('../comuni/footer.php');
+			require('comuni/footer.php');
 		}
 	}
 ?>
