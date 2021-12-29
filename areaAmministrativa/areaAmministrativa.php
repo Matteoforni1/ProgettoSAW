@@ -21,14 +21,13 @@
 		}
 		else {
 			$_SESSION["last_activity"]=time();
-			require('../comuni/header.php');
-			require('../comuni/nav.php'); 
-			echo "<div class='container'>";
-			 echo "<a href='allUsers.php'>Utenti</a>";
-			 echo "<a href='allBooks.php'>Libri</a>";
-			 echo "<a href='allTranactions.php'>Transazioni</a>";
+			require('comuni/header.php');
+			require('comuni/nav.php'); 
+			echo "<div class='admincontainer'>";
+			 echo "<div class='adminref'><a href='allUsers.php'><ul><li>Utenti</ul></li></a></div>";
+			 echo "<div class='adminref'><a href='allBooks.php'><ul><li>Libri</ul></li></a></div>";
 			echo "</div>";
-			require('../comuni/footer.php');
+			require('comuni/footer.php');
 		}
 	}	
 ?>
