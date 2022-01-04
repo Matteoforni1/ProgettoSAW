@@ -312,6 +312,52 @@ display: table-cell;
  #titolo {
 	 font-weight:bold;
  }
+.flexcont {
+	display:flex;
+	align-items: stretch;
+	flex-wrap:wrap;
+	margin-top:50px;
+}
+.clibro {
+	margin-left:150px;
+}
+
+.mostradati {
+margin:auto;
+margin-left:100px;
+}
+
+.descr{
+	display:flex;
+}
+
+.descr>p {
+	text-indent:150px;
+	margin-top:50px;
+	margin-bottom:50px;
+}
+
+#nl {
+	font-size:22px;
+	font-weight:bold;
+	margin-top:16px;
+	margin-bottom:20px;
+}
+#cl {
+	font-size:20px;
+	margin-top:20px;
+	margin-bottom:16px;
+}
+.mostradati>div {
+	margin-top:16px;
+	margin-bottom:16px;
+}
+ 
+ #carr {
+	margin-left:150px;
+	text-decoration:none;
+ }
+
 @media screen and (max-width: 700px) {
   .navbar {   
     flex-direction: column;
